@@ -5,7 +5,6 @@ from torch.utils.data import Dataset, DataLoader
 
 
 class HIN2vec(nn.Module):
-
     def __init__(self, node_size, path_size, embed_dim, sigmoid_reg=False, r=True):
         super().__init__()
 
@@ -22,7 +21,6 @@ class HIN2vec(nn.Module):
     def __initialize_model(self, node_size, path_size, embed_dim, r):
         self.start_embeds = nn.Embedding(node_size, embed_dim)
         self.end_embeds = self.start_embeds if r else nn.Embedding(node_size, embed_dim)
-
         self.path_embeds = nn.Embedding(path_size, embed_dim)
         # self.classifier = nn.Sequential(
         #     nn.Linear(embed_dim, 1),
@@ -45,7 +43,6 @@ class HIN2vec(nn.Module):
         output = torch.sigmoid(torch.sum(agg, axis=1))
 
         return output
-
 
 
 def train(log_interval, model, device, train_loader: DataLoader, optimizer, loss_function, epoch):
@@ -101,4 +98,3 @@ class NSTrainSet(Dataset):
 
     def __len__(self):
         return self.length
-
